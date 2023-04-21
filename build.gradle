@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+subprojects {
+
+    apply plugin: 'java'
+
+    group 'com.objective'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    }
+
+    task testAll {
+        dependsOn subprojects.test
+    }
+
+}
