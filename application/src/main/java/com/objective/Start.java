@@ -13,26 +13,19 @@ public class Start {
         );
     }
 
-    private int getSelectedResultPasta() {
+    private int getBuildConfirmDialog(String message) {
         return JOptionPane.showConfirmDialog(
                 null,
-                "O prato que você pensou é massa?",
-                "Confirm",
-                JOptionPane.YES_NO_OPTION
-        );
-    }
-
-    private int getSelectedResultLasagna() {
-        return JOptionPane.showConfirmDialog(
-                null,
-                "O prato que você pensou é Lasanha?",
+                message,
                 "Confirm",
                 JOptionPane.YES_NO_OPTION
         );
     }
 
     private void applyContextLasagna() {
-        var result = this.getSelectedResultLasagna();
+        var result = this.getBuildConfirmDialog(
+                "O prato que você pensou é Lasanha?"
+        );
         if (result == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Acertei de novo!");
             this.applyContext();
@@ -43,7 +36,9 @@ public class Start {
 
     public void applyContext() {
         this.init();
-        var result = this.getSelectedResultPasta();
+        var result = this.getBuildConfirmDialog(
+                "O prato que você pensou é massa?"
+        );
         if (result == JOptionPane.YES_OPTION) {
             this.applyContextLasagna();
         } else if (result == JOptionPane.NO_OPTION) {
