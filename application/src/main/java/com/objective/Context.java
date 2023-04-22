@@ -1,18 +1,19 @@
 package com.objective;
 
 import com.objective.domains.Node;
-import com.objective.domains.Nodes;
+import com.objective.adapter.NodeServicePortImpl;
 import com.objective.dtos.InputDTO;
+import com.objective.ports.inbound.NodeServicePort;
 
 import javax.swing.*;
 
 public class Context {
 
-    private final Nodes nodes;
+    private final NodeServicePort port;
     private final static String CHOCOLATE_CAKE = "Bolo de Chocolate";
 
     public Context() {
-        this.nodes = new Nodes();
+        this.port = new NodeServicePortImpl();
     }
 
     private int getBuildConfirmDialog(String message) {
@@ -48,7 +49,7 @@ public class Context {
             }
         } else if (result == JOptionPane.NO_OPTION) {
             var input = new InputDTO(node);
-            nodes.add(new Node(input.getMenu(), input.getDish()));
+            this.port.add(new Node(input.getMenu(), input.getDish()));
         }
     }
 
@@ -59,7 +60,7 @@ public class Context {
         if (result == JOptionPane.YES_OPTION) {
             this.applyContextLasagna();
         } else if (result == JOptionPane.NO_OPTION) {
-            var node = this.nodes.get();
+            var node = this.port.get();
             if(node.isPresent()) {
                 this.applyContext(node.get());
             } else {
