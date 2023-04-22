@@ -2,13 +2,18 @@ package com.objective;
 
 import com.objective.domains.Node;
 import com.objective.domains.Nodes;
+import com.objective.dtos.InputDTO;
 
 import javax.swing.*;
 
 public class Context {
 
-    private final Nodes nodes = new Nodes();
+    private final Nodes nodes;
     private final static String CHOCOLATE_CAKE = "Bolo de Chocolate";
+
+    public Context() {
+        this.nodes = new Nodes();
+    }
 
     private int getBuildConfirmDialog(String message) {
         return JOptionPane.showConfirmDialog(
@@ -42,10 +47,8 @@ public class Context {
                 JOptionPane.showMessageDialog(null, "Acertei de novo!");
             }
         } else if (result == JOptionPane.NO_OPTION) {
-            String value = JOptionPane.showInputDialog(null, "Qual prato você pensou?");
-            var next = node.getNext() != null ? node.getNext().getKey() : node.getKey();
-            String key = JOptionPane.showInputDialog(null, String.format("%s é  ______ mas %s não.", value, next));
-            nodes.add(new Node(key, value));
+            var input = new InputDTO(node);
+            nodes.add(new Node(input.getMenu(), input.getDish()));
         }
     }
 
