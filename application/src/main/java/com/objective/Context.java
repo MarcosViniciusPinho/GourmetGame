@@ -31,15 +31,19 @@ public class Context {
                 String.format("O prato que você pensou é %s?", node.getKey())
         );
         if (result == JOptionPane.YES_OPTION) {
-            var element = node.getNext();
-            if(element != null) {
-                this.apply(element);
-            } else {
-                JOptionPane.showMessageDialog(null, "Acertei de novo!");
-            }
+            this.iterateOverTheNodes(node);
         } else if (result == JOptionPane.NO_OPTION) {
             var input = new InputDTO(node);
             this.port.add(new Node(input.getMenu(), input.getDish()));
+        }
+    }
+
+    private void iterateOverTheNodes(Node node) {
+        var element = node.getNext();
+        if(element != null) {
+            this.apply(element);
+        } else {
+            JOptionPane.showMessageDialog(null, "Acertei de novo!");
         }
     }
 
