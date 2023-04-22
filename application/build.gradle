@@ -12,6 +12,8 @@ version '1.0-SNAPSHOT'
 
 dependencies {
     implementation 'org.openjfx:javafx-swing:20'
+    implementation 'com.google.inject:guice:5.0.1'
+
     implementation project(':business')
 }
 

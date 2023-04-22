@@ -1,7 +1,7 @@
 package com.objective;
 
+import com.objective.config.Inject;
 import com.objective.domains.Node;
-import com.objective.adapter.NodeServicePortImpl;
 import com.objective.dtos.InputDTO;
 import com.objective.ports.inbound.NodeServicePort;
 
@@ -13,7 +13,7 @@ public class Context {
     private final static String CHOCOLATE_CAKE = "Bolo de Chocolate";
 
     public Context() {
-        this.port = new NodeServicePortImpl();
+        this.port = Inject.getInstance(NodeServicePort.class);
     }
 
     private int getBuildConfirmDialog(String message) {
